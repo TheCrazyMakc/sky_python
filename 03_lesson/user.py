@@ -4,7 +4,7 @@ class User():
     print("запись создана")
     self.first_name = first_name
     self.last_name = last_name
-    self.FullName = first_name + " " + last_name
+    # self.fullName = first_name + " " + last_name
 
   def sayFirstName(self):
     print("меня зовут", self.first_name)
@@ -13,10 +13,4 @@ class User():
     print("моя фамилия", self.last_name)
 
   def setFullName(self):
-    print(self.FullName)
-
-alex = User("Alex", "Bold")
-
-alex.sayFirstName()
-alex.sayLastName()
-alex.setFullName()
+    print(f"{self.first_name} {self.last_name}")

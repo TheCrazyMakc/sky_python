@@ -29,5 +29,5 @@ mailing = Mailing(
 # Можно вывести данные для проверки
 print(f"Трек-номер: {mailing.track}")
 print(f"Стоимость: {mailing.cost}")
-print(f"Отправитель: {mailing.from_address.city}, {mailing.from_address.street} {mailing.from_address.house}")
-print(f"Получатель: {mailing.to_address.city}, {mailing.to_address.street} {mailing.to_address.house}")
+print(f"Отправитель: {mailing.from_address.city}, улица {mailing.from_address.street}, дом {mailing.from_address.house}, квартира {mailing.from_address.apartment}")
+print(f"Получатель: {mailing.to_address.city}, улица {mailing.to_address.street}, дом {mailing.to_address.house}, квартира {mailing.to_address.apartment}")
