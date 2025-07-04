@@ -1,0 +1,14 @@
+дефекты не обнаружены
+
+
+
+Рекомендации по улучшению функции contains:
+Использовать оператор in:
+
+def contains(self, string: str, symbol: str) -> bool:
+    return symbol in string
+    
+Или оставить проверку индекса:
+
+def contains(self, string: str, symbol: str) -> bool:
+    return string.find(symbol) != -1
