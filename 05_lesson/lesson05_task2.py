@@ -10,8 +10,6 @@ from selenium.webdriver.support import expected_conditions as EC
 driver = webdriver.Chrome(service=ChromeService(ChromeDriverManager().install()))
 
 try:
-  driver.get("https://www.google.com")
-
   driver.get("http://uitestingplayground.com/dynamicid")
 
   search_btn = driver.find_element(By.CSS_SELECTOR, "button.btn-primary")
