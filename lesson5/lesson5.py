@@ -26,3 +26,5 @@ search_input.send_keys("Python", Keys.RETURN)
 books = driver.find_elements(By.CSS_SELECTOR, "div.product-card__price-current")
 
 print(len(books))
+
+sleep(10)

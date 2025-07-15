@@ -9,7 +9,16 @@ from selenium.webdriver.support import expected_conditions as EC
 
 driver = webdriver.Chrome(service=ChromeService(ChromeDriverManager().install()))
 
-driver.get("https://www.google.com")
+try:
+  driver.get("https://www.google.com")
 
-driver.get("http://uitestingplayground.com/classattr")
+  driver.get("http://uitestingplayground.com/classattr")
 
+  search_btn = driver.find_element(By.CSS_SELECTOR, "button.btn-primary")
+
+  search_btn.click()
+
+  sleep(10)
+
+finally:
+  driver.quit()
