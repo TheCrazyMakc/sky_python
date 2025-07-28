@@ -7,28 +7,31 @@ from webdriver_manager.chrome import ChromeDriverManager
 import pytest
 
 # Константы
-TIMEOUT = 10
-SHORT_TIMEOUT = 2
-BASE_URL = "https://www.saucedemo.com/"
-USERNAME = "standard_user"
-PASSWORD = "secret_sauce"
+TIMEOUT = 10 # Максимальное время ожидания элементов (сек)
+SHORT_TIMEOUT = 2 # Короткое время ожидания
+BASE_URL = "https://www.saucedemo.com/" # URL тестируемого сайта
+USERNAME = "standard_user" # Логин для авторизации
+PASSWORD = "secret_sauce" # Пароль
 
 class LoginPage:
     def __init__(self, driver):
-        self.driver = driver
-        self.username_field = (By.CSS_SELECTOR, "#user-name")
-        self.password_field = (By.CSS_SELECTOR, "#password")
-        self.login_button = (By.CSS_SELECTOR, "#login-button")
+        self.driver = driver # Передаём драйвер Selenium
+        self.username_field = (By.CSS_SELECTOR, "#user-name") # Локатор поля логина
+        self.password_field = (By.CSS_SELECTOR, "#password") # Локатор поля пароля
+        self.login_button = (By.CSS_SELECTOR, "#login-button") # Локатор кнопки входа
 
     def open(self):
-        self.driver.get(BASE_URL)
-        return self
+        self.driver.get(BASE_URL) # Открывает страницу в браузере
+        return self # Возвращает сам объект, чтобы можно было делать цепочки вызовов
 
     def login(self, username, password):
+        # self.username_field — это кортеж: (By.CSS_SELECTOR, "#user-name")
+        # * (оператор распаковки) превращает кортеж в аргументы для find_element()
+        # то есть self.driver.find_element(*self.username_field) == self.driver.find_element(By.CSS_SELECTOR, "#user-name")
         self.driver.find_element(*self.username_field).send_keys(username)
         self.driver.find_element(*self.password_field).send_keys(password)
         self.driver.find_element(*self.login_button).click()
-        return InventoryPage(self.driver)
+        return InventoryPage(self.driver) # Возвращает новую страницу (InventoryPage)
 
 class InventoryPage:
     def __init__(self, driver):

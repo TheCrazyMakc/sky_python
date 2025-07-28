@@ -54,3 +54,5 @@ def test_saucedemo_checkout():
 
 if __name__ == "__main__":
     test_saucedemo_checkout()
+
+# pytest 07_lesson\start_test_shop.py -s
