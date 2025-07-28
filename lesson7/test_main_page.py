@@ -15,7 +15,7 @@ def test_cart_counter():
 
     main_page = MainPage(browser)
     main_page.set_cookie_policy()
-    main_page.search('no book search term')
+    main_page.search('python')
 
     result_page = ResultPage(browser)
     to_be = result_page.add_books()
