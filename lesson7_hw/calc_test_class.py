@@ -32,12 +32,3 @@ class CalculatorPage:
         WebDriverWait(self.driver, timeout).until(
             EC.text_to_be_present_in_element((By.CSS_SELECTOR, ".screen"), "15"))
         return self.driver.find_element(By.CSS_SELECTOR, ".screen").text
-    
-    # метод is_result_not_present() для проверки отсутствия результата
-    def is_result_not_present(self, timeout=5):
-        try:
-            WebDriverWait(self.driver, timeout).until(
-                EC.text_to_be_present_in_element((By.CSS_SELECTOR, ".screen"), "15"))
-            return False
-        except:
-            return True

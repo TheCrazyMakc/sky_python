@@ -45,7 +45,7 @@ def test_slow_calculator():
 
     except Exception as e:
         print(f"Ошибка во время выполнения теста: {str(e)}")
-        driver.save_screenshot("error.png")
+        driver.save_screenshot("lesson7_hw\error.png")
         raise    
 
     finally:
@@ -56,4 +56,4 @@ if __name__ == "__main__":
     test_slow_calculator()
     print("Тест завершен")
 
-# pytest 07_lesson\start_test_calc.py -s
+# pytest lesson7_hw\calc_test_run.py -s
