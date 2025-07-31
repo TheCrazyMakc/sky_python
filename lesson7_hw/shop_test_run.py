@@ -1,9 +1,4 @@
 from selenium import webdriver
-from selenium.webdriver.common.by import By
-from selenium.webdriver.support.ui import WebDriverWait
-from selenium.webdriver.support import expected_conditions as EC
-from selenium.webdriver.chrome.service import Service as ChromeService
-from webdriver_manager.chrome import ChromeDriverManager
 import pytest
 from shop_test_class import LoginPage
 from selenium.webdriver.firefox.service import Service as FirefoxService
@@ -19,7 +14,8 @@ PASSWORD = "secret_sauce"
 
 def test_shop_run():
     driver = webdriver.Firefox(service=FirefoxService(GeckoDriverManager().install()))
-    # гугл хром выдает предупреждение, что пароль был раскрыт. Из-за этого не получается проверить тест в хроме.
+    # гугл хром выдает предупреждение, что пароль был раскрыт. 
+    # Из-за этого не получается проверить тест в хроме.
     # driver = webdriver.Chrome(service=ChromeService(ChromeDriverManager().install()))
     
     try:
@@ -35,10 +31,14 @@ def test_shop_run():
         
         # 3. Переход в корзину и оформление
         checkout_page = (inventory_page
-            .go_to_cart() # переходим на страницу https://www.saucedemo.com/cart.html
-            .proceed_to_checkout() # переходим на страницу https://www.saucedemo.com/checkout-step-one.html
-            .fill_info("Maxim", "Skypro", "123456") # заполняем поля на странице
-            .continue_to_overview()) # переходим на страницу https://www.saucedemo.com/checkout-step-two.html
+            # переходим на страницу https://www.saucedemo.com/cart.html
+            .go_to_cart() 
+            # переходим на страницу https://www.saucedemo.com/checkout-step-one.html
+            .proceed_to_checkout() 
+            # заполняем поля на странице
+            .fill_info("Maxim", "Skypro", "123456") 
+            # переходим на страницу https://www.saucedemo.com/checkout-step-two.html
+            .continue_to_overview()) 
         
         # 4. Проверка суммы
         # в переменную кладем результат функции
@@ -46,7 +46,8 @@ def test_shop_run():
         # число, с которым должны будем проверить ответ
         expected_amount = 58.29
 
-        # если условие True, assert не вызывает ошибку и код продолжает работу. иначе будет выполнено действие после \
+        # если условие True, assert не вызывает ошибку и код продолжает работу. 
+        # иначе будет выполнено действие после \
         assert abs(total_amount - expected_amount) < 0.01, \
             f"Сумма не совпадает. Ожидалось: {expected_amount}, Получено: {total_amount}"
         

@@ -1,17 +1,13 @@
 from selenium import webdriver
 from selenium.webdriver.common.by import By
-from selenium.webdriver.chrome.service import Service as ChromeService
-from webdriver_manager.chrome import ChromeDriverManager
 from selenium.webdriver.support.ui import WebDriverWait
 from selenium.webdriver.support import expected_conditions as EC
-import time
 from time import sleep
 from selenium.webdriver.firefox.service import Service as FirefoxService
 from webdriver_manager.firefox import GeckoDriverManager
 
 # Инициализация драйвера Chrome (как указано в задании)
 driver = webdriver.Firefox(service=FirefoxService(GeckoDriverManager().install()))
-# driver = webdriver.Chrome(service=ChromeService(ChromeDriverManager().install()))
 
 try:
     # 1. Открытие страницы
