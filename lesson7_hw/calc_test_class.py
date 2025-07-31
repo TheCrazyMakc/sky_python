@@ -17,7 +17,8 @@ class CalculatorPage:
 
     def set_delay(self, seconds):
         delay_input = WebDriverWait(self.driver, 10).until(
-            EC.presence_of_element_located((By.CSS_SELECTOR, "#delay"))
+            EC.presence_of_element_located((By.CSS_SELECTOR, "#delay")
+            )
         )
         delay_input.clear()
         delay_input.send_keys(str(seconds))

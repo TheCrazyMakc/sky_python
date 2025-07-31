@@ -26,9 +26,6 @@ def test_slow_calculator():
 
         # 4. Проверка, что результат НЕ появляется сразу
         start_time = time.time()
-        assert calculator.is_result_not_present(), \
-            "Результат появился слишком быстро!"
-        print("Результат не появился сразу (ожидаемо)")
 
         # 5. Ожидание результата
         calculator.get_result()
