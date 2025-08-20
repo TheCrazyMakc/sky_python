@@ -1,25 +1,29 @@
 import requests
+import json
+from pathlib import Path
 
+# константы
 HEADER = {'Authorization': 'Bearer 1754393725260_a4ff66abe53ed0d61bc4913f9dd3981bbbdac0e1090868a1f042ecbd3a2e8a7f',
           'Content-Type': 'application/json'}
 BASE_URL = 'https://ru.yougile.com/api-v2'
-
 LOGIN = "only-max@yandex.ru"
 PASSWORD = "FRHRG7LT"
 NAME = "Maxim"
 
+# словарь с телом запроса
 auth_creds = {
         'login' : LOGIN,
         'password' : PASSWORD,
         'name' : NAME
     }
 
+# пустой словарь, чтобы в него позже записать ответ
 resp_body = {}
 
 def test_auth():
     global resp_body
     auth_response = requests.post(
-    "https://ru.yougile.com/api-v2/auth/companies", json=auth_creds)
+    f"{BASE_URL}/auth/companies", json=auth_creds)
 
     # Проверка статуса ответа
     if auth_response.status_code == 200:
@@ -30,10 +34,10 @@ def test_auth():
         print("Ошибка:", auth_response.status_code, auth_response.text)
 
 # Получаем данные
-data_get = test_auth()
+data_auth = test_auth()
 
 # Сохраняем в файл как текст
-if data_get:
-    with open('08_lesson/data_get.txt', 'w', encoding='utf-8') as file:
-        file.write(str(data_get))
-    print("Данные успешно сохранены в файл data_get.txt")
+if data_auth:
+    with open('08_lesson/data_auth.txt', 'w', encoding='utf-8') as file:
+        file.write(str(data_auth))
+    print("Данные успешно сохранены в файл data_auth.txt")
