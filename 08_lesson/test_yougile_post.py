@@ -1,13 +1,5 @@
 import requests
 
-# headers = {
-#     'Authorization': 'Bearer -vhWR+SnGtkHyd25ESxQLloFcqIr2J8j18mI4tNwmSd8mWHnHpPE90wLGzYlmV09',
-#     'Content-Type': 'application/json'
-# }
-
-# response = requests.get('https://ru.yougile.com/api-v2/users', headers=headers)
-# print(response.json())
-
 def test_create_project():
     headers = {
         'Authorization': 'Bearer -vhWR+SnGtkHyd25ESxQLloFcqIr2J8j18mI4tNwmSd8mWHnHpPE90wLGzYlmV09',
@@ -15,7 +7,7 @@ def test_create_project():
     }
 
     body = {
-          "title" : "Учёба2"
+          "title" : "Учёба3"
     }
 
     response = requests.post('https://ru.yougile.com/api-v2/projects', headers=headers, json=body)

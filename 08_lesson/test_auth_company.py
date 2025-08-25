@@ -17,6 +17,19 @@ auth_creds = {
         'name' : NAME
     }
 
+# def test_create_project():
+#     headers = {
+#         'Authorization': 'Bearer -vhWR+SnGtkHyd25ESxQLloFcqIr2J8j18mI4tNwmSd8mWHnHpPE90wLGzYlmV09',
+#         'Content-Type': 'application/json'
+#     }
+
+#     body = {
+#           "title" : "Учёба2"
+#     }
+
+#     response = requests.post('https://ru.yougile.com/api-v2/projects', headers=headers, json=body)
+#     print(response.json())
+
 # пустой словарь, чтобы в него позже записать ответ
 resp_body = {}
 
@@ -34,10 +47,10 @@ def test_auth():
         print("Ошибка:", auth_response.status_code, auth_response.text)
 
 # Получаем данные
-data_auth = test_auth()
+# data_auth = test_auth()
 
-# Сохраняем в файл как текст
-if data_auth:
-    with open('08_lesson/data_auth.txt', 'w', encoding='utf-8') as file:
-        file.write(str(data_auth))
-    print("Данные успешно сохранены в файл data_auth.txt")
+# # Сохраняем в файл как текст
+# if data_auth:
+#     with open('08_lesson/data_auth.txt', 'w', encoding='utf-8') as file:
+#         file.write(str(data_auth))
+#     print("Данные успешно сохранены в файл data_auth.txt")
