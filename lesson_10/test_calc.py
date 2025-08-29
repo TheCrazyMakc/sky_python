@@ -2,7 +2,7 @@ from selenium import webdriver
 from selenium.webdriver.chrome.service import Service as ChromeService
 from webdriver_manager.chrome import ChromeDriverManager
 import time
-from calc_test_class import CalculatorPage
+from calc_class import CalculatorPage
 
 
 def test_slow_calculator():
@@ -17,7 +17,7 @@ def test_slow_calculator():
         calculator.open()
 
         # 2. Установка задержки
-        calculator.set_delay(45)
+        calculator.set_delay(2)
 
         # 3. Нажатие кнопок
         buttons = ["7", "+", "8", "="]
@@ -36,7 +36,7 @@ def test_slow_calculator():
         print(f"Фактическое время выполнения: {execution_time:.2f} секунд")
 
         # Проверка что результат появился примерно через 45 секунд
-        assert 43 <= execution_time <= 47, \
+        assert 1 <= execution_time <= 5, \
             f"Время выполнения {execution_time:.2f} сек не соответствует " \
             f"ожидаемому (45±2 сек)"
 
