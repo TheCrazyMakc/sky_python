@@ -6,6 +6,11 @@ import allure
 
 class CalculatorPage:
     def __init__(self, driver):
+        """
+        Конструктор класса CalcMainPage.
+
+        :param driver: WebDriver — объект драйвера Selenium.
+        """
         self.driver = driver
         self.url = (
             "https://bonigarcia.dev/selenium-webdriver-java/"
