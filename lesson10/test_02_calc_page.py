@@ -1,6 +1,6 @@
 import pytest
 from selenium import webdriver
-from pages.СаclMainPage import CalcMainPage
+from СаclMainPage import CalcMainPage
 
 
 @pytest.fixture
