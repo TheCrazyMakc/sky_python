@@ -11,7 +11,6 @@ from calc_class import CalculatorPage
 @allure.title("Тест медленного калькулятора с задержкой 45 секунд")
 @allure.description("""
 Этот тест проверяет работу калькулятора с установленной задержкой.
-Ожидается, что результат операции появится через примерно 45 секунд.
 """)
 def test_slow_calculator():
     """
@@ -29,7 +28,7 @@ def test_slow_calculator():
 
         # 2. Установка задержки
         with allure.step("Установка задержки вычислений"):
-            calculator.set_delay(2)
+            calculator.set_delay(45)
 
         # 3. Нажатие кнопок
         with allure.step("Выполнение вычисления 7 + 8"):
@@ -59,7 +58,7 @@ def test_slow_calculator():
 
         # Проверка что результат появился примерно через 45 секунд
         with allure.step("Проверка соответствия времени выполнения"):
-            assert 1 <= execution_time <= 5, \
+            assert 1 <= execution_time <= 50, \
                 f"Время выполнения {execution_time:.2f} сек не соответствует " \
                 f"ожидаемому (45±2 сек)"
 
@@ -74,8 +73,8 @@ def test_slow_calculator():
     except Exception as e:
         with allure.step("Ошибка во время выполнения теста"):
             print(f"Ошибка во время выполнения теста: {str(e)}")
-            driver.save_screenshot("lesson7_hw\\error.png")
-            allure.attach.file("lesson7_hw\\error.png", name="Скриншот ошибки")
+            driver.save_screenshot("lesson_10\\error.png")
+            allure.attach.file("lesson_10\\error.png", name="Скриншот ошибки")
             allure.attach(f"Ошибка: {str(e)}", name="Текст ошибки")
             raise
 

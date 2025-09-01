@@ -1,3 +1,4 @@
+import allure
 from selenium.webdriver.common.by import By
 from selenium.webdriver.support.ui import WebDriverWait
 from selenium.webdriver.support import expected_conditions as EC
@@ -21,15 +22,19 @@ class LoginPage:
         # Локатор кнопки входа
         self.login_button = (By.CSS_SELECTOR, "#login-button")
 
+    @allure.step("Открытие страницы авторизации")
     def open(self):
         self.driver.get(BASE_URL)  # Открывает страницу в браузере
+        allure.attach(f"Открыт URL: {BASE_URL}", name="URL страницы")
         return self  # Возвращает сам объект для цепочки вызовов
 
+    @allure.step("Авторизация пользователя {username}")
     def login(self, username, password):
         """Авторизация на сайте."""
         self.driver.find_element(*self.username_field).send_keys(username)
         self.driver.find_element(*self.password_field).send_keys(password)
         self.driver.find_element(*self.login_button).click()
+        allure.attach(f"Логин: {username}", name="Учетные данные")
         return InventoryPage(self.driver)
 
 
@@ -39,19 +44,33 @@ class InventoryPage:
         self.inventory_list = (By.CSS_SELECTOR, ".inventory_list")
         self.shopping_cart = (By.CSS_SELECTOR, "a.shopping_cart_link")
 
+    @allure.step("Ожидание загрузки страницы товаров")
     def wait_for_load(self):
         """Ожидание загрузки страницы."""
         WebDriverWait(self.driver, TIMEOUT).until(
             EC.presence_of_element_located(self.inventory_list))
         return self
 
+    @allure.step("Добавление товара в корзину: {item_id}")
     def add_item_to_cart(self, item_id):
         """Добавление товара в корзину по ID."""
         item_locator = (By.CSS_SELECTOR, f"#{item_id}")
         WebDriverWait(self.driver, SHORT_TIMEOUT).until(
             EC.presence_of_element_located(item_locator)).click()
+        item_name = self._get_item_name_by_id(item_id)
+        allure.attach(f"Добавлен товар: {item_name}", name="Товар добавлен")
         return self
 
+    def _get_item_name_by_id(self, item_id):
+        """Вспомогательный метод для получения названия товара по ID."""
+        item_names = {
+            "add-to-cart-sauce-labs-backpack": "Sauce Labs Backpack",
+            "add-to-cart-sauce-labs-bolt-t-shirt": "Sauce Labs Bolt T-Shirt",
+            "add-to-cart-sauce-labs-onesie": "Sauce Labs Onesie"
+        }
+        return item_names.get(item_id, item_id)
+
+    @allure.step("Переход в корзину")
     def go_to_cart(self):
         """Переход в корзину."""
         WebDriverWait(self.driver, TIMEOUT).until(
@@ -64,6 +83,7 @@ class CartPage:
         self.driver = driver
         self.checkout_button = (By.CSS_SELECTOR, "#checkout")
 
+    @allure.step("Переход к оформлению заказа")
     def proceed_to_checkout(self):
         """Переход к оформлению заказа."""
         WebDriverWait(self.driver, TIMEOUT).until(
@@ -80,6 +100,7 @@ class CheckoutPage:
         self.continue_button = (By.CSS_SELECTOR, "#continue")
         self.total_label = (By.CSS_SELECTOR, "div.summary_total_label")
 
+    @allure.step("Заполнение информации для доставки: {first_name} {last_name}, {postal_code}")
     def fill_info(self, first_name, last_name, postal_code):
         """Заполнение информации для оформления заказа."""
         WebDriverWait(self.driver, TIMEOUT).until(
@@ -89,17 +110,23 @@ class CheckoutPage:
         self.driver.find_element(*self.first_name).send_keys(first_name)
         self.driver.find_element(*self.last_name).send_keys(last_name)
         self.driver.find_element(*self.postal_code).send_keys(postal_code)
+        allure.attach(f"Данные доставки: {first_name} {last_name}, {postal_code}", 
+                     name="Информация о доставке")
         return self
 
+    @allure.step("Продолжение оформления заказа")
     def continue_to_overview(self):
         """Продолжение оформления заказа."""
         WebDriverWait(self.driver, TIMEOUT).until(
             EC.element_to_be_clickable(self.continue_button)).click()
         return self
 
+    @allure.step("Получение итоговой суммы заказа")
     def get_total_amount(self):
         """Получение итоговой суммы заказа."""
         total_element = WebDriverWait(self.driver, TIMEOUT).until(
             EC.visibility_of_element_located(self.total_label))
         total_text = total_element.text
-        return float(total_text.split('$')[1])
+        total_amount = float(total_text.split('$')[1])
+        allure.attach(f"Итоговая сумма: ${total_amount:.2f}", name="Сумма заказа")
+        return total_amount
